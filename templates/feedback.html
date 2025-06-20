@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>意見回饋</h2>
+{% if submitted %}
+  <p>感謝您的寶貴意見！</p>
+{% else %}
+  <form method="post">
+    <textarea name="message" rows="5" cols="40" placeholder="請輸入意見"></textarea><br>
+    <button type="submit">送出</button>
+  </form>
+{% endif %}
+{% endblock %}

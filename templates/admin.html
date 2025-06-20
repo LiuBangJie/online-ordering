@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>訂單管理</h2>
+<form method="get">
+  <select name="status">
+    <option value="">全部</option>
+    <option value="尚未接單">尚未接單</option>
+    <option value="已接單">已接單</option>
+    <option value="已完成">已完成</option>
+    <option value="已取消">已取消</option>
+  </select>
+  <button type="submit">篩選</button>
+</form>
+<table border="1">
+  <tr><th>單號</th><th>顧客</th><th>桌號</th><th>內容</th><th>金額</th><th>狀態</th><th>操作</th></tr>
+  {% for order in orders %}
+    <tr>
+      <td>{{ order.id }}</td>
+      <td>{{ order.customer_name }}</td>
+      <td>{{ order.table_number }}</td>
+      <td>
+        {% for item in order["items"] %}
+          {{ item.name }} x {{ item.quantity }}<br>
+        {% endfor %}
+      </td>
+      <td>${{ order.total }}</td>
+      <td>{{ order.status }}</td>
+      <td>
+        <form method="post" action="{{ url_for('update_status') }}">
+          <input type="hidden" name="order_id" value="{{ order.id }}">
+          <select name="new_status">
+            <option {% if order.status == '尚未接單' %}selected{% endif %}>尚未接單</option>
+            <option {% if order.status == '已接單' %}selected{% endif %}>已接單</option>
+            <option {% if order.status == '已完成' %}selected{% endif %}>已完成</option>
+            <option {% if order.status == '已取消' %}selected{% endif %}>已取消</option>
+          </select>
+          <button type="submit">更新</button>
+        </form>
+      </td>
+    </tr>
+  {% endfor %}
+</table>
+{% endblock %}

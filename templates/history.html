@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>近30天點餐紀錄</h2>
+{% if orders %}
+  <ul>
+    {% for order in orders %}
+      <li>{{ order.created_at }} - ${{ order.total }} - 狀態：{{ order.status }}</li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>無歷史訂單</p>
+{% endif %}
+{% endblock %}

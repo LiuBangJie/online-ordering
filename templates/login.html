@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>後台登入</h2>
+<form method="post">
+  <input name="password" type="password" placeholder="管理密碼"><br>
+  <button type="submit">登入</button>
+</form>
+<p style="color:red;">{{ error }}</p>
+{% endblock %}

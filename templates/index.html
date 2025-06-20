@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>菜單</h2>
+<div class="menu">
+  <form id="orderForm" method="post" action="{{ url_for('submit_order') }}">
+    {% for item in menu %}
+      <div class="item">
+        <img src="{{ url_for('static', filename='images/' + item.image) }}" width="100">
+        <h4>{{ item.name }} - ${{ item.price }}</h4>
+        <input type="number" name="{{ item.id }}" value="0" min="0">
+      </div>
+    {% endfor %}
+    <button type="submit">送出訂單</button>
+  </form>
+</div>
+{% endblock %}

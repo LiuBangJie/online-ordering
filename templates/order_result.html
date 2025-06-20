@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>訂單完成</h2>
+<p>桌號：{{ table_number }}</p>
+<p>單號：{{ order_id }}</p>
+<ul>
+  {% for item in order_items %}
+    <li>{{ item.name }} x {{ item.quantity }} - ${{ item.price * item.quantity }}</li>
+  {% endfor %}
+</ul>
+<p>總金額：${{ total }}</p>
+<a href="/logout_user">返回首頁</a>
+{% endblock %}
